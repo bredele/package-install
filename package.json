@@ -1,8 +1,11 @@
 {
   "name": "@bredele/package-install",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fast and programmatic npm install based on runtime engine",
   "main": "./dist/cjs/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "cmplr"
   },
