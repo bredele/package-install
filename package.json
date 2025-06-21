@@ -1,11 +1,11 @@
 {
   "name": "@bredele/package-install",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast and programmatic npm install based on runtime engine",
-  "main": "index.js",
-    "scripts": {
-      "build": "cmplr"
-    },
+  "main": "./dist/cjs/index.js",
+  "scripts": {
+    "build": "cmplr"
+  },
   "keywords": [
     "npm",
     "install",
@@ -14,6 +14,19 @@
   "author": "Olivier Wietrich",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^24.0.3",
     "cmplr": "^1.0.0"
+  },
+  "dependencies": {
+    "@bredele/detect-package-manager": "^1.0.5"
+  },
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
   }
 }
