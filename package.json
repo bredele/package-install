@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "description": "Fast and programmatic npm install based on runtime engine",
   "main": "index.js",
-  "scripts": {},
-  "keywords": ["npm", "install", "package"],
+    "scripts": {
+      "build": "cmplr"
+    },
+  "keywords": [
+    "npm",
+    "install",
+    "package"
+  ],
   "author": "Olivier Wietrich",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "cmplr": "^1.0.0"
+  }
 }
