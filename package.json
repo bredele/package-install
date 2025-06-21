@@ -1,0 +1,10 @@
+{
+  "name": "@bredele/package-install",
+  "version": "1.0.0",
+  "description": "Fast and programmatic npm install based on runtime engine",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": ["npm", "install", "package"],
+  "author": "Olivier Wietrich",
+  "license": "MIT"
+}
