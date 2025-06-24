@@ -17,7 +17,13 @@ import install from '@bredele/package-install';
 await install('react');
 
 // install dev dependencies
-await install('typescript', true);
+await install('typescript', { dev: true });
+
+// install in specific directory
+await install('react', { cwd: './my-project' });
+
+// install dev dependencies in specific directory
+await install('typescript', { dev: true, cwd: './my-project' });
 
 // install multiple dependencies
 await install('react react-dom');
