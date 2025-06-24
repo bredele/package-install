@@ -6,37 +6,42 @@ const execAsync = promisify(exec);
 
 export default async (
   packages: string,
-  isDev: boolean = false
+  options?: { dev?: boolean; cwd?: string }
 ): Promise<void> => {
   const pm = detectPackageManager();
   const { engine } = pm;
 
   let command: string;
-  const devFlag = isDev ? "--save-dev" : "";
+  const devFlag = options?.dev ? "--save-dev" : "";
 
   switch (engine) {
     case "npm":
       await execAsync("npm set progress=false");
+      const prefixFlag = options?.cwd ? `--prefix ${options.cwd}` : "";
       command =
-        `npm install ${packages} ${devFlag} --prefer-offline --no-audit --silent`.trim();
+        `npm install ${packages} ${devFlag} ${prefixFlag} --prefer-offline --no-audit --silent`.trim();
       break;
     case "yarn":
-      command = `yarn add ${packages} ${
-        isDev ? "--dev" : ""
+      const yarnCwdFlag = options?.cwd ? `--cwd ${options.cwd}` : "";
+      command = `yarn ${yarnCwdFlag} add ${packages} ${
+        options?.dev ? "--dev" : ""
       } --prefer-offline --no-audit --silent`.trim();
       break;
     case "pnpm":
+      const pnpmDirFlag = options?.cwd ? `--dir ${options.cwd}` : "";
       command =
-        `pnpm add ${packages} ${devFlag} --prefer-offline --no-audit --silent`.trim();
+        `pnpm ${pnpmDirFlag} add ${packages} ${devFlag} --prefer-offline --no-audit --silent`.trim();
       break;
     case "bun":
+      const bunCwdFlag = options?.cwd ? `--cwd ${options.cwd}` : "";
       command =
-        `bun add ${packages} ${devFlag} --prefer-offline --no-audit --silent`.trim();
+        `bun ${bunCwdFlag} add ${packages} ${devFlag} --prefer-offline --no-audit --silent`.trim();
       break;
     default:
       await execAsync("npm set progress=false");
+      const defaultPrefixFlag = options?.cwd ? `--prefix ${options.cwd}` : "";
       command =
-        `npm install ${packages} ${devFlag} --prefer-offline --no-audit --silent`.trim();
+        `npm install ${packages} ${devFlag} ${defaultPrefixFlag} --prefer-offline --no-audit --silent`.trim();
   }
 
   await execAsync(command);
